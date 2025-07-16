@@ -1,0 +1,581 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    color: #1d1d1f;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    color: #1d1d1f;
+    padding: 25px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  
+  .header .dates {
+    font-size: 16px;
+    opacity: 0.8;
+    font-weight: 400;
+  }
+  
+  .quick-links {
+    background: rgba(248, 249, 250, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+  }
+  
+  .quick-links h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1d1d1f;
+    letter-spacing: -0.3px;
+  }
+  
+  .link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  
+  .link-btn {
+    background: rgba(0, 122, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
+    padding: 16px 12px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 55px;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: -0.2px;
+  }
+  
+  .link-btn:hover {
+    background: rgba(0, 122, 255, 1);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(0, 122, 255, 0.3);
+  }
+  
+  .day-card {
+    margin: 12px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .day-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Weather-themed backgrounds */
+  .day-card.sunny {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 235, 59, 0.1) 100%);
+  }
+  
+  .day-card.cloudy {
+    background: linear-gradient(135deg, rgba(158, 158, 158, 0.15) 0%, rgba(189, 189, 189, 0.1) 100%);
+  }
+  
+  .day-card.rainy {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(100, 181, 246, 0.1) 100%);
+  }
+  
+  .day-card.partly-cloudy {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(158, 158, 158, 0.1) 100%);
+  }
+  
+  .day-card.snowy {
+    background: linear-gradient(135deg, rgba(224, 224, 224, 0.2) 0%, rgba(255, 255, 255, 0.15) 100%);
+  }
+  
+  .day-card.foggy {
+    background: linear-gradient(135deg, rgba(176, 190, 197, 0.2) 0%, rgba(207, 216, 220, 0.15) 100%);
+  }
+  
+  .day-card.stormy {
+    background: linear-gradient(135deg, rgba(84, 110, 122, 0.2) 0%, rgba(120, 144, 156, 0.15) 100%);
+  }
+  
+  .day-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  .day-info {
+    flex: 1;
+  }
+  
+  .day-date {
+    font-weight: 600;
+    font-size: 18px;
+    color: #1d1d1f;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+  }
+  
+  .day-location {
+    font-size: 15px;
+    color: #86868b;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  
+  .location-link {
+    color: #007aff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .location-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .weather-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #86868b;
+    margin-top: 4px;
+  }
+  
+  .weather-icon {
+    font-size: 16px;
+  }
+  
+  .weather-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .weather-main {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .weather-range {
+    font-size: 12px;
+    color: #86868b;
+    font-weight: 400;
+  }
+  
+  .weather-description {
+    font-size: 11px;
+    color: #86868b;
+    text-transform: capitalize;
+  }
+  
+  .weather-update-btn {
+    background: rgba(52, 199, 89, 0.1);
+    color: #34c759;
+    border: 1px solid rgba(52, 199, 89, 0.3);
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .weather-update-btn:hover {
+    background: rgba(52, 199, 89, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .weather-update-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .weather-loading {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #34c759;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .weather-error {
+    color: #ff3b30;
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  
+  .api-key-notice {
+    background: rgba(255, 149, 0, 0.1);
+    color: #ff9500;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    margin: 12px 16px;
+    border: 1px solid rgba(255, 149, 0, 0.3);
+  }
+  
+  .api-key-notice a {
+    color: #ff9500;
+    text-decoration: underline;
+  }
+  
+  .day-status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    letter-spacing: -0.1px;
+  }
+  
+  .work-day .day-status {
+    background: rgba(0, 122, 255, 0.9);
+  }
+  
+  .weekend .day-status {
+    background: rgba(52, 199, 89, 0.9);
+  }
+  
+  .wedding-day .day-status {
+    background: rgba(255, 59, 48, 0.9);
+  }
+  
+  .expand-icon {
+    font-size: 20px;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    color: #86868b;
+    margin-left: 12px;
+  }
+  
+  .day-card.expanded .expand-icon {
+    transform: rotate(180deg);
+  }
+  
+  .day-details {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  
+  .day-card.expanded .day-details {
+    max-height: 800px;
+    padding: 20px;
+  }
+  
+  .detail-section {
+    margin-bottom: 20px;
+  }
+  
+  .detail-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #1d1d1f;
+    letter-spacing: -0.2px;
+  }
+  
+  .detail-content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #515154;
+    font-weight: 400;
+  }
+  
+  .quick-access-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .quick-access-btn {
+    background: rgba(0, 122, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: #007aff;
+    padding: 12px 18px;
+    border-radius: 22px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(0, 122, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: -0.1px;
+  }
+  
+  .quick-access-btn:hover {
+    background: rgba(0, 122, 255, 0.2);
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 122, 255, 0.2);
+  }
+  
+  .legend {
+    padding: 20px;
+    background: rgba(248, 249, 250, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 13px;
+    margin-top: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .legend-color {
+    width: 24px;
+    height: 6px;
+    border-radius: 3px;
+    margin-right: 12px;
+  }
+  
+  .blue {
+    background: rgba(0, 122, 255, 0.9);
+  }
+  .green {
+    background: rgba(52, 199, 89, 0.9);
+  }
+  .red {
+    background: rgba(255, 59, 48, 0.9);
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 320px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .modal h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1d1d1f;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  
+  .person-selector {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .person-btn {
+    background: rgba(0, 122, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    letter-spacing: -0.2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .person-btn:hover {
+    background: rgba(0, 122, 255, 1);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(0, 122, 255, 0.4);
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #86868b;
+    transition: color 0.2s ease;
+  }
+  
+  .close-modal:hover {
+    color: #1d1d1f;
+  }
+  
+  .floating-action {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(0, 122, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 12px 32px rgba(0, 122, 255, 0.3);
+    z-index: 1000;
+  }
+  
+  .floating-action:hover {
+    transform: scale(1.1);
+    box-shadow: 0 20px 60px rgba(0, 122, 255, 0.4);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .day-card {
+    animation: fadeIn 0.6s ease-out;
+  }
+  
+  .day-card:nth-child(even) {
+    animation-delay: 0.1s;
+  }
+  
+  .day-card:nth-child(odd) {
+    animation-delay: 0.2s;
+  }
+  
+  @media (max-width: 768px) {
+    .day-card {
+      margin: 8px 12px;
+    }
+    
+    .header h1 {
+      font-size: 24px;
+    }
+    
+    .floating-action {
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+    
+    .day-header {
+      padding: 16px;
+    }
+    
+    .day-date {
+      font-size: 16px;
+    }
+    
+    .day-location {
+      font-size: 14px;
+    }
+    
+    .quick-access-btn {
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+  }
