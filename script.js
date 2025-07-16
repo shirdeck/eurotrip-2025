@@ -93,12 +93,31 @@ function showApiKeyNotice() {
 // Utility functions
 function openGoogleMaps(location) {
   const url = `https://maps.google.com/maps?q=${encodeURIComponent(location)}`;
-  window.open(url, '_blank');
+  
+  // Create a temporary link element for more reliable opening
+  const link = document.createElement('a');
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  
+  // Add the link to the DOM temporarily
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 function openDriveFolder(type) {
   if (folderUrls[type]) {
-    window.open(folderUrls[type], '_blank');
+    // Create a temporary link element for more reliable opening
+    const link = document.createElement('a');
+    link.href = folderUrls[type];
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    
+    // Add the link to the DOM temporarily
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   } else {
     alert(`Folder URL not found for: ${type}`);
   }
@@ -121,7 +140,16 @@ function openSpecificDocument(type, filename) {
 
   // For non-train documents, use direct links
   if (documentUrls[filename]) {
-    window.open(documentUrls[filename], "_blank");
+    // Create a temporary link element for more reliable opening
+    const link = document.createElement('a');
+    link.href = documentUrls[filename];
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    
+    // Add the link to the DOM temporarily
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   } else {
     alert(`Document not found: ${filename}\nPlease add the Google Drive link to the documentUrls object.`);
   }
@@ -130,7 +158,16 @@ function openSpecificDocument(type, filename) {
 function openTrainTicket(person) {
   const ticketUrl = trainTicketUrls[person]?.[currentTrainFile];
   if (ticketUrl) {
-    window.open(ticketUrl, "_blank");
+    // Create a temporary link element for more reliable opening
+    const link = document.createElement('a');
+    link.href = ticketUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    
+    // Add the link to the DOM temporarily
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   } else {
     alert(`Train ticket not found for ${person}: ${currentTrainFile}\nPlease add the Google Drive link.`);
   }
