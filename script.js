@@ -108,7 +108,14 @@ function openSpecificDocument(type, filename) {
   if (type === "train") {
     // Show modal for train tickets
     currentTrainFile = filename;
-    document.getElementById("trainModal").style.display = "flex";
+    const modal = document.getElementById("trainModal");
+    modal.style.display = "flex";
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = "hidden";
+    
+    // Focus the modal for accessibility
+    modal.focus();
     return;
   }
 
@@ -131,7 +138,12 @@ function openTrainTicket(person) {
 }
 
 function closeTrainModal() {
-  document.getElementById("trainModal").style.display = "none";
+  const modal = document.getElementById("trainModal");
+  modal.style.display = "none";
+  
+  // Restore body scroll
+  document.body.style.overflow = "auto";
+  
   currentTrainFile = "";
 }
 
